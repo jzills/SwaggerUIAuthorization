@@ -1,0 +1,34 @@
+<select id="role">
+    <option value="User">User</option>
+    <option value="Administrator">Administrator</option>
+</select>
+<button id="loginButton">Login</button>
+<script>
+    const authenticateUser = async () => {
+        // This is for demonstration purposes only. 
+        // Of course, you should NEVER allow a user to arbitrarily pass a role 
+        // for themselves as a query string parameter nor should you pass a 
+        // role as a query string parameter to begin with. Or even have a mutatable role exposed
+        // client side like this.
+        const role = document.getElementById("role").value;
+        const response = await fetch(`authenticate?role=${role}`);
+        if (response.ok) {
+            redirectToSwagger();
+        }
+    }
+
+    const redirectToSwagger = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const returnUrl = urlParams.get("ReturnUrl");
+        window.location.href = `${window.location.origin}${returnUrl}`;
+    }
+
+    const loginButton = document.getElementById("loginButton");
+    loginButton.addEventListener("click", authenticateUser);
+</script>
+<style>
+    body {
+        text-align: center;
+        margin-top: 50vh;
+    }
+</style>
