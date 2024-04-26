@@ -5,15 +5,6 @@ using Sample.Authentication;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddAuthorization(options => options
-        .AddPolicy("CanDeletePolicy", policy => 
-        {
-            policy.RequireAuthenticatedUser();
-            policy.RequireClaim(ClaimTypes.NameIdentifier);
-            policy.AddAuthenticationSchemes(AuthenticationDefaults.AuthenticationScheme);
-        }));
-
-builder.Services
     .AddAuthentication(AuthenticationDefaults.AuthenticationScheme)
     .AddBearerToken("MyBearerToken", options =>
     {
@@ -23,6 +14,15 @@ builder.Services
     {
         options.LoginPath = "/authentication/login";
     });
+
+builder.Services
+    .AddAuthorization(options => options
+        .AddPolicy("CanDeletePolicy", policy => 
+        {
+            policy.RequireAuthenticatedUser();
+            policy.RequireClaim(ClaimTypes.NameIdentifier);
+            policy.AddAuthenticationSchemes(AuthenticationDefaults.AuthenticationScheme);
+        }));
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddMvc();

@@ -1,10 +1,10 @@
 using System.Reflection;
 
-namespace SwaggerUIAuthorization.Extensions;
+namespace SwaggerUIAuthorization.Extensions.Internal;
 
 internal static class CustomAttributeArgumentExtensions
 {
-    public static bool TryGetPolicy(
+    internal static bool TryGetPolicy(
         this IList<CustomAttributeTypedArgument> attributeArgs, 
         out string policy
     )

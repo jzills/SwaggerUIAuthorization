@@ -1,7 +1,9 @@
 
-## SwaggerUI Authorization
+# SwaggerUIAuthorization
 
-### Usage
+[![NuGet Version](https://img.shields.io/nuget/v/SwaggerUIAuthorization.svg)](https://www.nuget.org/packages/SwaggerUIAuthorization/) [![NuGet Downloads](https://img.shields.io/nuget/dt/SwaggerUIAuthorization.svg)](https://www.nuget.org/packages/SwaggerUIAuthorization/)
+
+## Usage
 
 Call `AddSwaggerUIAuthorization` to register depedencies.
 
@@ -27,7 +29,7 @@ Register SwaggerUI through `UseSwaggerUIAuthorization` instead of Swashbuckle's 
         options.RoutePrefix = "mycoolapi/docs";
     });
 
-### Example
+## Example
 
 The `UserController` will only be rendered for authenticated users with the role "User" as specified by the `AuthorizeAttribute`. The "Delete" action will only be rendered for authenticated users who have the "User" role and satisfy all of the requirements for the "CanDeletePolicy".
 
@@ -56,7 +58,7 @@ In the case below, the authenticated user has the "User" role claim only.
 
 ![image](../docs/UserSample_1.png)
 
-#### The same rules that .NET has defined for AuthorizeAttribute's applies
+### The same rules that .NET has defined for an AuthorizeAttribute applies
 - Comma separated roles are evaluated on an OR basis
 - Multiple `AuthorizeAttribute`'s are evaluated on an AND basis
 - An `AllowAnonymousAttribute` bypasses all authorization

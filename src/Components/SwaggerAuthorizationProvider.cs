@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using SwaggerUIAuthorization.Extensions;
+using SwaggerUIAuthorization.Extensions.Internal;
 
 namespace SwaggerUIAuthorization.Components;
 

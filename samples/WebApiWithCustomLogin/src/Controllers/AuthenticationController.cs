@@ -14,7 +14,7 @@ public class AuthenticationController : Controller
     public IActionResult Login() => View();
 
     // This is for demonstration purposes only. 
-    // Of course, you should NEVER allow a user to arbitrarily pass a role 
+    // Of course, you should (probably) never allow a user to arbitrarily pass a role 
     // for themselves as a query string parameter nor should you pass a 
     // role as a query string parameter to begin with. Or even have a mutatable role exposed
     // client side like this.

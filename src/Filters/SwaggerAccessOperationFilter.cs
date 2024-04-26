@@ -1,7 +1,7 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using SwaggerUIAuthorization.Components;
-using SwaggerUIAuthorization.Extensions;
+using SwaggerUIAuthorization.Extensions.Internal;
 
 namespace SwaggerUIAuthorization.Filters;
 
@@ -30,7 +30,7 @@ internal class SwaggerAccessOperationFilter : IOperationFilter
         if ( context.MethodInfo.TryGetAuthorizationAttribute(out var attributes) &&
             !context.MethodInfo.TryGetAllowAnonymousAttribute(out var _))
         {
-            var shouldRender = attributes.All(attribute => _authorizationHandler.ShouldRender(attribute));
+            var shouldRender = attributes.All(_authorizationHandler.ShouldRender);
             if (shouldRender)
             {
                 _operations.Add(actionId);

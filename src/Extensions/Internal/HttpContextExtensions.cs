@@ -1,11 +1,11 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
-namespace SwaggerUIAuthorization.Extensions;
+namespace SwaggerUIAuthorization.Extensions.Internal;
 
 internal static class HttpContextExtensions
 {
-    public static bool TryGetAuthenticatedUser(
+    internal static bool TryGetAuthenticatedUser(
         this HttpContext context, 
         out ClaimsPrincipal user
     )
@@ -14,7 +14,7 @@ internal static class HttpContextExtensions
         return context.User?.Identity?.IsAuthenticated ?? false;
     }
 
-    public static bool IsRoutingToSwagger(this HttpContext context, string routePrefix) =>
+    internal static bool IsRoutingToSwagger(this HttpContext context, string routePrefix) =>
         context.Request.Path.HasValue && 
         context.Request.Path.Value.StartsWith(
             routePrefix, 

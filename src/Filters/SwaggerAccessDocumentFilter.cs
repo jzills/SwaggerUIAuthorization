@@ -1,7 +1,7 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using SwaggerUIAuthorization.Components;
-using SwaggerUIAuthorization.Extensions;
+using SwaggerUIAuthorization.Extensions.Internal;
 
 namespace SwaggerUIAuthorization.Filters;
 

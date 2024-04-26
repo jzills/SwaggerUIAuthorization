@@ -1,7 +1,7 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Authorization;
 
-namespace SwaggerUIAuthorization.Extensions;
+namespace SwaggerUIAuthorization.Extensions.Internal;
 
 internal static class MethodInfoExtensions
 {
@@ -12,7 +12,7 @@ internal static class MethodInfoExtensions
             .Where(attribute => attribute.AttributeType == typeof(TAttribute));
     }
 
-    public static bool TryGetAuthorizationAttribute(
+    internal static bool TryGetAuthorizationAttribute(
         this MethodInfo methodInfo, 
         out IEnumerable<CustomAttributeData> attributes
     )
@@ -21,7 +21,7 @@ internal static class MethodInfoExtensions
         return attributes.Any();
     }
 
-    public static bool TryGetAllowAnonymousAttribute(
+    internal static bool TryGetAllowAnonymousAttribute(
         this MethodInfo methodInfo, 
         out IEnumerable<CustomAttributeData> attributes
     )

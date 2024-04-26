@@ -1,10 +1,10 @@
 using System.Reflection;
 
-namespace SwaggerUIAuthorization.Extensions;
+namespace SwaggerUIAuthorization.Extensions.Internal;
 
 internal static class CustomAttributeNamedArgumentExtensions
 {
-    public static bool TryGetAuthenticationSchemes(
+    internal static bool TryGetAuthenticationSchemes(
         this IList<CustomAttributeNamedArgument> attributeArgs, 
         out IEnumerable<string> authenticationSchemes
     )
@@ -17,7 +17,7 @@ internal static class CustomAttributeNamedArgumentExtensions
         return authenticationSchemes?.Any() ?? false;
     }
 
-    public static bool TryGetRoles(
+    internal static bool TryGetRoles(
         this IList<CustomAttributeNamedArgument> attributeArgs, 
         out IEnumerable<string> roles
     )
@@ -35,7 +35,7 @@ internal static class CustomAttributeNamedArgumentExtensions
         }
     }
 
-    public static bool TryGetPolicy(
+    internal static bool TryGetPolicy(
         this IList<CustomAttributeNamedArgument> attributeArgs, 
         out string policy
     )
@@ -53,7 +53,7 @@ internal static class CustomAttributeNamedArgumentExtensions
         }
     }
 
-    public static IDictionary<string, string> ToMemberValueDictionary(
+    internal static IDictionary<string, string> ToMemberValueDictionary(
         this IList<CustomAttributeNamedArgument> args
     ) => args.ToDictionary(
             element => element.MemberName, 

@@ -1,7 +1,7 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
-using SwaggerUIAuthorization.Extensions;
+using SwaggerUIAuthorization.Extensions.Internal;
 
 namespace SwaggerUIAuthorization.Components;
 

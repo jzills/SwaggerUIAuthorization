@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using SwaggerUIAuthorization.Components;
-using SwaggerUIAuthorization.Filters;
+using SwaggerUIAuthorization.Extensions.Internal;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace SwaggerUIAuthorization.Extensions;
@@ -26,11 +26,7 @@ public static class IServiceCollectionExtensions
         this IServiceCollection services
     ) => services
             .AddSwaggerUIAuthorizationDefaults()
-            .AddSwaggerGen(options => 
-            {
-                options.DocumentFilter<SwaggerAccessDocumentFilter>();
-                options.OperationFilter<SwaggerAccessOperationFilter>();
-            });
+            .AddSwaggerGen(options => options.AddSwaggerAuthorizationFilters());
 
     /// <summary>
     /// Registers the required components for SwaggerUIAuthorization. 
@@ -49,8 +45,7 @@ public static class IServiceCollectionExtensions
         var options = new SwaggerGenOptions();
         configureOptions.Invoke(options);
 
-        options.DocumentFilter<SwaggerAccessDocumentFilter>();
-        options.OperationFilter<SwaggerAccessOperationFilter>();
+        options.AddSwaggerAuthorizationFilters();
 
         return services.AddSwaggerGen(_ => configureOptions(options));
     }

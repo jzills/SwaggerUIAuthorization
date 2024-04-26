@@ -1,15 +1,15 @@
 using SwaggerUIAuthorization.Enums;
 
-namespace SwaggerUIAuthorization.Extensions;
+namespace SwaggerUIAuthorization.Extensions.Internal;
 
 internal static class IDictionaryExtensions
 {
-    public static bool TryGetRoleValue(
+    internal static bool TryGetRoleValue(
         this IDictionary<string, string> source, 
         out string roleValue
     ) => source.TryGetValueInternal(nameof(AuthorizationTypes.Roles), out roleValue);
 
-    public static bool TryGetPolicyValue(
+    internal static bool TryGetPolicyValue(
         this IDictionary<string, string> source, 
         out string policyValue
     ) => source.TryGetValueInternal(nameof(AuthorizationTypes.Policy), out policyValue);

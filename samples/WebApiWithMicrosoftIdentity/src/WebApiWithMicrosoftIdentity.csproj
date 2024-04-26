@@ -10,7 +10,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
     <PackageReference Include="Microsoft.Identity.Web" Version="2.17.0" />
-    <!-- <PackageReference Include="SwaggerUIAuthorization" Version="*" /> -->
     <PackageReference Include="Swashbuckle.AspNetCore" Version="*" />
   </ItemGroup>
 
