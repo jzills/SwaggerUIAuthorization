@@ -5,20 +5,31 @@ using SwaggerUIAuthorization.Extensions.Internal;
 
 namespace SwaggerUIAuthorization.Filters;
 
+/// <summary>
+/// A <c>class</c> representing a <c>SwaggerAccessDocumentFilter</c>.
+/// </summary>
 internal class SwaggerAccessDocumentFilter : IDocumentFilter
 {
-    // private readonly ISwaggerSchemaCollection _schemas;
+    /// <summary>
+    /// An <c>ISwaggerOperationCollection</c> containing Swagger operations.
+    /// </summary>
     private readonly ISwaggerOperationCollection _operations;
 
+    /// <summary>
+    /// Creates an instance of <c>SwaggerAccessDocumentFilter</c>.
+    /// </summary>
+    /// <param name="operations">An <c>ISwaggerOperationCollection</c> containing Swagger operations.</param>
+    /// <returns>An instance of <c>SwaggerAccessDocumentFilter</c>.</returns>
     public SwaggerAccessDocumentFilter(
-        // ISwaggerSchemaCollection schemas,
         ISwaggerOperationCollection operations
-    )
-    {
-        // _schemas = schemas;
-        _operations = operations;
-    }
+    ) => _operations = operations;
 
+    /// <summary>
+    /// Validates a set <c>OpenApiDocument</c> operations based on their membership
+    /// to this <c>ISwaggerOperationCollection</c>.
+    /// </summary>
+    /// <param name="swaggerDoc">An <c>OpenApiDocument</c>.</param>
+    /// <param name="context">A <c>DocumentFilterContext</c>.</param>
     public void Apply(
         OpenApiDocument swaggerDoc, 
         DocumentFilterContext context
@@ -35,11 +46,5 @@ internal class SwaggerAccessDocumentFilter : IDocumentFilter
                 }
             }
         }
-
-        // TODO:    Figure out how to conditionally remove schema but
-        //          for now, the fix is to not allow schema in UseSwaggerUI configuration.
-        // TODO:    Cannot arbitrarily remove schemas without tags, i.e. DateOnly, etc
-        //          because they will be missing from the larger schema, i.e. WeatherForecast
-        // _schemas.RemoveIfNotRequired(context.SchemaRepository.Schemas);
     }
 }

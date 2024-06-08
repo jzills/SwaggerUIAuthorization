@@ -22,6 +22,7 @@ The schema displayed at the bottom of an api using SwaggerUI is force hidden int
     options.DefaultModelsExpandDepth(-1);
 
 ## Installation
+
 `SwaggerUIAuthorization` is available on [NuGet](https://www.nuget.org/packages/SwaggerUIAuthorization/). 
 
     dotnet add package SwaggerUIAuthorization
@@ -31,5 +32,6 @@ The schema displayed at the bottom of an api using SwaggerUI is force hidden int
 [SwaggerUIAuthorization](src/README.md)
 
 ## Examples
+
 [WebApiWithCustomLogin](samples/WebApiWithCustomLogin/README.md) \
 [WebApiWithMicrosoftIdentity](samples/WebApiWithMicrosoftIdentity/README.md)

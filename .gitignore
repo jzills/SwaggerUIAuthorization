@@ -2,3 +2,5 @@
 **bin
 **obj
 **appsettings_internal.json
+
+.DS_Store

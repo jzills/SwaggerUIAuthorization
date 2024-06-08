@@ -2,21 +2,36 @@ using System.Reflection;
 
 namespace SwaggerUIAuthorization.Extensions.Internal;
 
+/// <summary>
+/// An <c>class</c> representing <c>CustomAttributeNamedArgument</c> extension methods.
+/// </summary>
 internal static class CustomAttributeNamedArgumentExtensions
 {
+    /// <summary>
+    /// Attempts to get authentication schemes in <c>IList&lt;CustomAttributeNamedArgument&gt;</c>.
+    /// </summary>
+    /// <param name="attributeArgs">An <c>IList&lt;CustomAttributeNamedArgument&gt;</c>.</param>
+    /// <param name="authenticationSchemes">An <c>IEnumerable&lt;string&gt;</c> representing found authentication schemes.</param>
+    /// <returns>A <c>bool</c> indicating the success of the operation.</returns>
     internal static bool TryGetAuthenticationSchemes(
         this IList<CustomAttributeNamedArgument> attributeArgs, 
         out IEnumerable<string> authenticationSchemes
     )
     {
         authenticationSchemes = attributeArgs
-            .Where(arg => arg.MemberName == "AuthenticationSchemes")
+            .Where(attributeArg => attributeArg.MemberName == "AuthenticationSchemes")
             .Select(authenticationScheme => authenticationScheme.TypedValue.Value as string ?? string.Empty)
             .Where(authenticationScheme => !string.IsNullOrWhiteSpace(authenticationScheme));
 
         return authenticationSchemes?.Any() ?? false;
     }
 
+    /// <summary>
+    /// Attempts to get any roles in the collection of <c>CustomAttributeNamedArgument</c>.
+    /// </summary>
+    /// <param name="attributeArgs">An <c>IList&lt;CustomAttributeNamedArgument&gt;</c>.</param>
+    /// <param name="roles">An <c>IEnumerable&lt;string&gt;</c> representing found role names.</param>
+    /// <returns>A <c>bool</c> indicating the success of the operation.</returns>
     internal static bool TryGetRoles(
         this IList<CustomAttributeNamedArgument> attributeArgs, 
         out IEnumerable<string> roles
@@ -35,6 +50,12 @@ internal static class CustomAttributeNamedArgumentExtensions
         }
     }
 
+    /// <summary>
+    /// Attempts to get any policies in the collection of <c>CustomAttributeNamedArgument</c>.
+    /// </summary>
+    /// <param name="attributeArgs">An <c>IList&lt;CustomAttributeNamedArgument&gt;</c>.</param>
+    /// <param name="policy">An <c>string</c> representing found policies.</param>
+    /// <returns>A <c>bool</c> indicating the success of the operation.</returns>
     internal static bool TryGetPolicy(
         this IList<CustomAttributeNamedArgument> attributeArgs, 
         out string policy
@@ -53,6 +74,12 @@ internal static class CustomAttributeNamedArgumentExtensions
         }
     }
 
+    /// <summary>
+    /// Converts an <c>IList&lt;CustomAttributeNamedArgument&gt;</c> to an <c>IDictionary&lt;string, string&gt;</c> where
+    /// the key is the <c>MemberName</c> and the value is the <c>TypedValue</c> value.
+    /// </summary>
+    /// <param name="args">An <c>IList&lt;CustomAttributeNamedArgument&gt;</c>.</param>
+    /// <returns>A <c>bool</c> indicating the success of the operation.</returns>
     internal static IDictionary<string, string> ToMemberValueDictionary(
         this IList<CustomAttributeNamedArgument> args
     ) => args.ToDictionary(

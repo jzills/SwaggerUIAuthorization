@@ -5,13 +5,20 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace SwaggerUIAuthorization.Extensions;
 
+/// <summary>
+/// An <c>class</c> representing <c>IServiceCollection</c> extension methods.
+/// </summary>
 public static class IServiceCollectionExtensions
 {
+    /// <summary>
+    /// Registers required dependencies into the DI container.
+    /// </summary>
+    /// <param name="services">An <c>IServiceCollection</c>.</param>
+    /// <returns>An <c>IServiceCollection</c>.</returns>
     private static IServiceCollection AddSwaggerUIAuthorizationDefaults(
         this IServiceCollection services
     ) => services
             .AddHttpContextAccessor()
-            // .AddSingleton<ISwaggerSchemaCollection, SwaggerSchemaCollection>()
             .AddSingleton<ISwaggerOperationCollection, SwaggerOperationCollection>()
             .AddTransient<ISwaggerAuthorizationHandler, SwaggerAuthorizationHandler>()
             .AddTransient<ISwaggerAuthorizationProvider, SwaggerAuthorizationProvider>();

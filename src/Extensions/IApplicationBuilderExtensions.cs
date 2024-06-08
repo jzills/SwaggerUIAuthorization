@@ -4,8 +4,16 @@ using SwaggerUIAuthorization.Components;
 
 namespace SwaggerUIAuthorization.Extensions;
 
+/// <summary>
+/// An <c>class</c> representing <c>IApplicationBuilder</c> extension methods.
+/// </summary>
 public static class IApplicationBuilderExtensions
 {
+    /// <summary>
+    /// Invokes the specified options and overrides the <c>DefaultModelsExpandDepth</c> to be set to -1.
+    /// </summary>
+    /// <param name="configureOptions">An <c>Action&ltSwaggerUIOptions&gt</c> used to configure SwaggerUI.</param>
+    /// <returns>An instance of <c>SwaggerUIOptions</c>.</returns>
     private static SwaggerUIOptions GetSwaggerUIOptions(
         Action<SwaggerUIOptions>? configureOptions = null
     )
@@ -19,6 +27,12 @@ public static class IApplicationBuilderExtensions
         return options;
     }
 
+    /// <summary>
+    /// Invokes the specified options and registers <c>SwaggerAuthenticationMiddleware</c> middleware.
+    /// </summary>
+    /// <param name="app"></param>
+    /// <param name="configureOptions">An <c>Action&ltSwaggerAuthenticationOptions&gt</c> used to configure SwaggerUIAuthentication.</param>
+    /// <returns>An instance of <c>IApplicationBuilder</c>.</returns>
     private static IApplicationBuilder UseSwaggerAuthentication(
         this IApplicationBuilder app,
         Action<SwaggerAuthenticationOptions>? configureOptions = null
