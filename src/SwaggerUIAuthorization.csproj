@@ -4,16 +4,29 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
 
+  <PropertyGroup>
     <PackageId>SwaggerUIAuthorization</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>Joshua Zillwood</Authors>
+    <Description>Control access to SwaggerUI, ensuring that only authenticated users with appropriate permissions can view documentation their roles have access to. This package leverages .NET's authentication and authorization mechanisms, aligning with the rules already established within your application.</Description>
     <Company></Company>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/jzills/SwaggerUIAuthorization</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jzills/SwaggerUIAuthorization.git</RepositoryUrl> 
+    <RepositoryType>git</RepositoryType> 
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
       <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../resources/icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
