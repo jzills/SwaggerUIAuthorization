@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <PackageId>SwaggerUIAuthorization</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>Joshua Zillwood</Authors>
     <Description>Control access to SwaggerUI, ensuring that only authenticated users with appropriate permissions can view documentation their roles have access to. This package leverages .NET's authentication and authorization mechanisms, aligning with the rules already established within your application.</Description>
     <Company></Company>
