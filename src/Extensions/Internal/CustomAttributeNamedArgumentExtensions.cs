@@ -1,4 +1,5 @@
 using System.Reflection;
+using SwaggerUIAuthorization.Constants;
 
 namespace SwaggerUIAuthorization.Extensions.Internal;
 
@@ -7,6 +8,16 @@ namespace SwaggerUIAuthorization.Extensions.Internal;
 /// </summary>
 internal static class CustomAttributeNamedArgumentExtensions
 {
+    /// <summary>
+    /// Determines if the attribute arguments indicate that only the authentication scheme is being verified.
+    /// </summary>
+    /// <param name="attributeArgs">The list of custom attribute arguments to check.</param>
+    /// <returns><c>true</c> if there is only one argument and its name matches the authentication scheme constant; otherwise, <c>false</c>.</returns>
+    internal static bool IsAuthenticationSchemeVerificationOnly(
+        this IList<CustomAttributeNamedArgument> attributeArgs
+    ) => attributeArgs.Count == 1 && 
+        attributeArgs[0].MemberName == AuthenticationConstants.AuthenticationSchemes;
+
     /// <summary>
     /// Attempts to get authentication schemes in <c>IList&lt;CustomAttributeNamedArgument&gt;</c>.
     /// </summary>
@@ -19,7 +30,7 @@ internal static class CustomAttributeNamedArgumentExtensions
     )
     {
         authenticationSchemes = attributeArgs
-            .Where(attributeArg => attributeArg.MemberName == "AuthenticationSchemes")
+            .Where(attributeArg => attributeArg.MemberName == AuthenticationConstants.AuthenticationSchemes)
             .Select(authenticationScheme => authenticationScheme.TypedValue.Value as string ?? string.Empty)
             .Where(authenticationScheme => !string.IsNullOrWhiteSpace(authenticationScheme));
 

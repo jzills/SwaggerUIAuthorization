@@ -30,28 +30,21 @@ internal class SwaggerAuthorizationProvider : ISwaggerAuthorizationProvider
         IAuthorizationService authorizationService
     )
     {
+        ArgumentNullException.ThrowIfNull(httpContextAccessor.HttpContext, nameof(httpContextAccessor.HttpContext));
+        ArgumentNullException.ThrowIfNull(httpContextAccessor.HttpContext.User, nameof(httpContextAccessor.HttpContext.User));
+
         HttpContextAccessor = httpContextAccessor;
         AuthorizationService = authorizationService;
     }
 
     /// <inheritdoc/>
     public bool IsAuthorized(IEnumerable<string>? roles) =>
-        roles?.Any(role => 
-            HttpContextAccessor?.HttpContext?.User.IsInRole(role) ?? false) 
-                ?? false;
+        roles?.Any(HttpContextAccessor!.HttpContext!.User.IsInRole) ?? false;
 
     /// <inheritdoc/>
-    public bool IsAuthorized(string? policy)
-    {
-        if (HttpContextAccessor?.HttpContext?.TryGetAuthenticatedUser(out var user) ?? false)
-        {
-            return AuthorizationService
+    public bool IsAuthorized(string? policy) =>
+        HttpContextAccessor!.HttpContext!.TryGetAuthenticatedUser(out var user) &&
+            AuthorizationService
                 .AuthorizeAsync(user, resource: null, policy!)
                     .Result.Succeeded;
-        }
-        else
-        {
-            return false;
-        }
-    }
 }

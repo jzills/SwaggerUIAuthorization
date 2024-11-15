@@ -16,5 +16,5 @@ internal interface ISwaggerOperationCollection
     /// </summary>
     /// <param name="operationId">A <c>string</c> representing an operation.</param>
     /// <returns>A <c>bool</c> representing whether or not a document element will be rendered.</returns>
-    bool IsAllowed(string operationId);
+    bool HasOperation(string operationId);
 }

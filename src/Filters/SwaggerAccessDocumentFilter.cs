@@ -40,7 +40,7 @@ internal class SwaggerAccessDocumentFilter : IDocumentFilter
             foreach (var operation in pathValue.Operations)
             {
                 var actionId = operation.Value.Tags.GetActionId();
-                if (!_operations.IsAllowed(actionId))
+                if (!_operations.HasOperation(actionId))
                 {
                     pathValue.Operations.Remove(operation);
                 }

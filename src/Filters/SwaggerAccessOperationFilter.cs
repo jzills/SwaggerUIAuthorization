@@ -1,7 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using SwaggerUIAuthorization.Components;
 using SwaggerUIAuthorization.Extensions.Internal;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace SwaggerUIAuthorization.Filters;
 
@@ -53,9 +54,15 @@ internal class SwaggerAccessOperationFilter : IOperationFilter
         var actionId = context.ApiDescription.ActionDescriptor.Id;
         operation.Tags.Add(actionId);
 
-        if ( context.MethodInfo.TryGetAuthorizationAttribute(out var attributes) &&
-            !context.MethodInfo.TryGetAllowAnonymousAttribute(out var _))
+        // First check for AllowAnonymousAttribute since
+        // the presence of one will override any AuthorizeAttribute from running.
+        if (context.MethodInfo.TryGetCustomAttribute<AllowAnonymousAttribute>(out var _))
         {
+            _operations.Add(actionId);
+        }
+        else if (context.MethodInfo.TryGetCustomAttribute<AuthorizeAttribute>(out var attributes))
+        {
+            // Multiple AuthorizeAttribute's are joined with AND expressions.
             var shouldRender = attributes.All(_authorizationHandler.ShouldRender);
             if (shouldRender)
             {
@@ -64,6 +71,7 @@ internal class SwaggerAccessOperationFilter : IOperationFilter
         }
         else
         {
+            // Nothing to see here...
             _operations.Add(actionId);
         }
     }

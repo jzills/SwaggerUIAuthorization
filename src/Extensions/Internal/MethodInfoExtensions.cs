@@ -1,5 +1,4 @@
 using System.Reflection;
-using Microsoft.AspNetCore.Authorization;
 
 namespace SwaggerUIAuthorization.Extensions.Internal;
 
@@ -22,32 +21,18 @@ internal static class MethodInfoExtensions
                     .Where(attribute => attribute.AttributeType == typeof(TAttribute));
 
     /// <summary>
-    /// Attemps to get an <c>AuthorizeAttribute</c> from a specified <c>MethodInfo</c>.
+    /// Attemps to get a <c>TAttribute</c> from a specified <c>MethodInfo</c>.
     /// </summary>
     /// <param name="methodInfo">An instance of <c>MethodInfo</c>.</param>
     /// <param name="attributes">An <c>IEnumerable&lt;CustomAttributeData&gt;</c>.</param>
+    /// <typeparam name="TAttribute">An <c>Attribute</c>.</typeparam> 
     /// <returns>A <c>bool</c> indicating the success of the operation.</returns>
-    internal static bool TryGetAuthorizationAttribute(
+    internal static bool TryGetCustomAttribute<TAttribute>(
         this MethodInfo methodInfo, 
         out IEnumerable<CustomAttributeData> attributes
-    )
+    ) where TAttribute : Attribute
     {
-        attributes = GetCustomAttributes<AuthorizeAttribute>(methodInfo);
-        return attributes.Any();
-    }
-
-    /// <summary>
-    /// Attemps to get an <c>AllowAnonymousAttribute</c> from a specified <c>MethodInfo</c>.
-    /// </summary>
-    /// <param name="methodInfo">An instance of <c>MethodInfo</c>.</param>
-    /// <param name="attributes">An <c>IEnumerable&lt;CustomAttributeData&gt;</c>.</param>
-    /// <returns>A <c>bool</c> indicating the success of the operation.</returns>
-    internal static bool TryGetAllowAnonymousAttribute(
-        this MethodInfo methodInfo, 
-        out IEnumerable<CustomAttributeData> attributes
-    )
-    {
-        attributes = GetCustomAttributes<AllowAnonymousAttribute>(methodInfo);
+        attributes = GetCustomAttributes<TAttribute>(methodInfo);
         return attributes.Any();
     }
 }

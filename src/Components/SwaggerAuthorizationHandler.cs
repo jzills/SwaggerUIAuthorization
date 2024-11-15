@@ -2,6 +2,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
 using SwaggerUIAuthorization.Extensions.Internal;
+using SwaggerUIAuthorization.Constants;
 
 namespace SwaggerUIAuthorization.Components;
 
@@ -49,19 +50,13 @@ internal class SwaggerAuthorizationHandler : ISwaggerAuthorizationHandler
     {
         if (args.TryGetAuthenticationSchemes(out var authenticationSchemes))
         {
-            var isAuthenticated = authenticationSchemes.Any(authenticationScheme => 
-                AuthenticateSynchronously(authenticationScheme));
-
+            var isAuthenticated = authenticationSchemes.Any(AuthenticateSynchronously);
             if (!isAuthenticated)
             {
                 return false;
             }
 
-            var isAuthenticationSchemeVerificationOnly = 
-                args.Count == 1 && 
-                args[0].MemberName == "AuthenticationSchemes";
-
-            if (isAuthenticationSchemeVerificationOnly)
+            if (args.IsAuthenticationSchemeVerificationOnly())
             {
                 return true;
             }
@@ -86,17 +81,9 @@ internal class SwaggerAuthorizationHandler : ISwaggerAuthorizationHandler
     /// </summary>
     /// <param name="args">A collection of <c>CustomAttributeTypedArgument</c>.</param>
     /// <returns>A <c>bool</c> representing whether or not a document element will be rendered.</returns>
-    private bool ShouldRender(IList<CustomAttributeTypedArgument> args)
-    {
-        if (args.TryGetPolicy(out var policy))
-        {
-            return AuthorizationProvider.IsAuthorized(policy);
-        }
-        else
-        {
-            return false;
-        }
-    }
+    private bool ShouldRender(IList<CustomAttributeTypedArgument> args) =>
+        args.TryGetPolicy(out var policy) && 
+            AuthorizationProvider.IsAuthorized(policy);
 
     /// <summary>
     /// Authenticates the specified scheme synchronously.

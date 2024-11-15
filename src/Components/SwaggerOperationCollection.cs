@@ -20,15 +20,7 @@ internal class SwaggerOperationCollection : ISwaggerOperationCollection
     }
 
     /// <inheritdoc/>
-    public bool IsAllowed(string operationId)
-    {
-        if (!string.IsNullOrWhiteSpace(operationId))
-        {
-            return _operations.Contains(operationId);
-        }
-        else
-        {
-            return false;
-        }
-    }
+    public bool HasOperation(string operationId) =>
+        !string.IsNullOrWhiteSpace(operationId) && 
+            _operations.Contains(operationId);
 }
