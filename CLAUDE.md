@@ -20,7 +20,17 @@ dotnet run --project samples/WebApiWithCustomLogin/src/WebApiWithCustomLogin.csp
 dotnet run --project samples/WebApiWithMicrosoftIdentity/src/WebApiWithMicrosoftIdentity.csproj
 ```
 
-There are no automated tests in this repository.
+## Tests
+
+```bash
+# Run unit tests
+dotnet test test/Unit/SwaggerUIAuthorization.Unit.Tests.csproj
+
+# Run integration tests
+dotnet test test/Integration/SwaggerUIAuthorization.Integration.Tests.csproj
+```
+
+The unit test project (`test/Unit/`) covers individual components with mocks. The integration test project (`test/Integration/`) spins up a real in-process `TestServer` with the full middleware pipeline to verify end-to-end behaviour.
 
 ## Architecture
 
