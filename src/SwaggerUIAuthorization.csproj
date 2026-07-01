@@ -15,8 +15,8 @@
     <Company></Company>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/jzills/SwaggerUIAuthorization</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/jzills/SwaggerUIAuthorization.git</RepositoryUrl> 
+    <PackageProjectUrl>https://github.com/jzills/swagger-ui-authorization</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jzills/swagger-ui-authorization.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType> 
     <PackageIcon>Icon.jpg</PackageIcon>
     <PackageTags>swashbuckle;swagger;swaggerUI;redoc</PackageTags>
